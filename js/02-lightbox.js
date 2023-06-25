@@ -3,7 +3,7 @@ import { galleryItems } from "./gallery-items.js";
 
 const gallery = document.querySelector(".gallery");
 
-const bigImages = galleryItems.map((image) => image.original);
+const original = galleryItems.map((image) => image.original);
 
 const markup = galleryItems
   .map(
@@ -17,12 +17,9 @@ const markup = galleryItems
 
 gallery.insertAdjacentHTML("beforeend", markup);
 
-gallery.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  if (event.target.nodeName !== "IMG") {
-    return;
-  }
+const lightbox = new SimpleLightbox(".gallery__item", {
+  sourceAttr: "href",
+  captionsData: "alt",
+  captionPosition: "outside",
+  captionDelay: 250,
 });
-
-const album = $(gallery).simpleLightbox();
